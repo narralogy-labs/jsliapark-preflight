@@ -13,7 +13,7 @@ def analyze_diff(changeset: ChangeSet) -> ChangeSet:
     prompt = _load_prompt("diff_analyzer")
 
     response = get_client().messages.create(
-        model="claude-opus-4-5",
+        model="nvidia/nemotron-3-super-120b-a12b",  # was "claude-opus-4-5"
         max_tokens=1024,
         system=prompt,
         messages=[

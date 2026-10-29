@@ -1,5 +1,6 @@
 import threading
 from anthropic import Anthropic
+from .openport_llm import anthropic_client
 
 _client: Anthropic | None = None
 _lock = threading.Lock()
@@ -10,5 +11,5 @@ def get_client() -> Anthropic:
     global _client
     with _lock:
         if _client is None:
-            _client = Anthropic()
+            _client = anthropic_client()
     return _client

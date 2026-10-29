@@ -15,7 +15,7 @@ def run_standards_pass(changeset: ChangeSet, collection: chromadb.Collection) ->
     context = _build_context(changeset, collection)
 
     response = get_client().messages.create(
-        model="claude-opus-4-5",
+        model="nvidia/nemotron-3-super-120b-a12b",  # was "claude-opus-4-5"
         max_tokens=1024,
         system=prompt,
         messages=[

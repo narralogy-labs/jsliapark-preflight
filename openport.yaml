@@ -1,0 +1,33 @@
+# Written by OpenPort: which model each LLM call uses after the port, and what it used before.
+openport: 0.1.0
+call_sites:
+- id: diff_analyzer.analyze_diff
+  file: agents/diff_analyzer.py
+  line: 15
+  status: ported
+  model: nvidia/nemotron-3-super-120b-a12b
+  was: claude-opus-4-5
+- id: pr_description.generate_pr_description
+  file: agents/pr_description.py
+  line: 11
+  status: ported
+  model: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
+  was: claude-opus-4-5
+- id: review_agent._run_pass
+  file: agents/review_agent.py
+  line: 10
+  status: ported
+  model: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
+  was: claude-opus-4-5
+  check:
+  - 'Tuned: append to the system prompt by hand: "Output ONLY the JSON object specified, no extra text or commentary. For
+    security reviews: do not flag performance issues (e.g., N+1 queries) as vulnerabilities; parameterized queries with placeholders
+    are safe — do not report as SQL injection. For correctness reviews: do not flag caught exceptions as unhandled; proper
+    error handling with logging and safe returns is correct. Apply the >90% confidence threshold strictly — if uncertain,
+    omit."'
+- id: standards_agent.run_standards_pass
+  file: agents/standards_agent.py
+  line: 17
+  status: ported
+  model: nvidia/nemotron-3-super-120b-a12b
+  was: claude-opus-4-5
