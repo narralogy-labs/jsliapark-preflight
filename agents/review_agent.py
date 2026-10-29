@@ -8,12 +8,14 @@ def _run_pass(changeset: ChangeSet, prompt_name: str, category: str) -> ReviewRe
     diff_content = _format_diff_for_review(changeset)
     
     response = get_client().messages.create(
-        model="claude-opus-4-5",
-        max_tokens=1024,
+        model="nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",  # was "claude-opus-4-5"
+        max_tokens=4096,
         system=prompt,
         messages=[
             {"role": "user", "content": f"Please review this diff:\n\n{diff_content}"}
-        ]
+        ],
+        extra_body={'chat_template_kwargs': {'enable_thinking': True}},
+        temperature=0.1,
     )
     
     raw = response.content[0].text

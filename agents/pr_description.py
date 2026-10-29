@@ -9,7 +9,7 @@ def generate_pr_description(changeset: ChangeSet) -> PRDescription:
     context = _build_context(changeset)
 
     response = get_client().messages.create(
-        model="claude-opus-4-5",
+        model="nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",  # was "claude-opus-4-5"
         max_tokens=2048,
         system=prompt,
         messages=[
